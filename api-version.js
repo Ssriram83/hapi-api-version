@@ -34,7 +34,7 @@ exports.register = function (plugin, options, next) {
             return reply.continue();
         }
 
-        const requestedVersionMatch = reqHeader.match(pattern);
+        const requestedVersionMatch = reqHeader.match(pattern) || [null,null,default_version];
         if (requestedVersionMatch && !pattern.test(urlPath[0])) {
             const origUrl = '/' + urlPath.join('/');
             const originalConfiguredVersion = route_version_map[origUrl];
@@ -46,17 +46,15 @@ exports.register = function (plugin, options, next) {
             urlPath.unshift('', requestedVersion);
             const versionedUrl = urlPath.join('/');
 
+            const route = plugin.match(request.method, versionedUrl);
+            const originalRoute = plugin.match(request.method, origUrl);
+
             // Get the version for an url path.
             const configuredVersion = route_version_map[versionedUrl];
             // Try to find the exact match for the version
-            if (configuredVersion || (configuredVersion && configuredVersion.indexOf(requestedVersion) > -1)) {
+            if (route) {
                 request.setUrl(versionedUrl + (request.url.search || ''));
                 request.headers.apiVersion = requestedVersion;
-            }
-            else if (originalConfiguredVersion && originalConfiguredVersion.indexOf(requestedVersion) > -1) {
-                // If not able to find exact match - check if there is an un-versioned url which allows the use of this version.
-                request.headers.apiVersion = requestedVersion;
-                request.setUrl(origUrl + (request.url.search || ''));
             }
             else {
                 // If none matches - then throw not found error error.
