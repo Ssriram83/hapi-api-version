@@ -1,7 +1,7 @@
 {
   "name": "hapi-api-version-support",
   "description": "Plugin to Support API Versioning in Hapi",
-   "main": "api-version.js"
+   "main": "api-version.js",
   "scripts": {
     "test": "lab ./test/unit.js --m 10000",
     "lint": "eslint api-version.js"
