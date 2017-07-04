@@ -1,5 +1,5 @@
 {
-  "name": "hapi-api-version",
+  "name": "hapi-api-version-support",
   "description": "Plugin to Support API Versioning in Hapi",
   "scripts": {
     "test": "lab ./test/unit.js --m 10000",
@@ -7,12 +7,12 @@
   },
   "version": "0.0.1",
   "dependencies": {
-    "boom": "^5.1.0",
-    "hapi": "^16.4.3"
+    "boom": "^5.1.0"
   },
   "devDependencies": {
     "eslint-config-hapi": "^10.0.0",
     "eslint-plugin-hapi": "^4.0.0",
-    "lab": "14.1.0"
+    "lab": "14.1.0",
+    "hapi": "^16.4.3"
   }
 }

@@ -7,10 +7,7 @@ module.exports = function (done, additionalPlugins) {
 
 // Create a server with a host and port
     const server = new Hapi.Server();
-    server.connection({
-        host: 'localhost',
-        port: 8001
-    });
+    server.connection({});
 
 // Allows 1.0 but not 1.1
     server.route({
