@@ -28,7 +28,7 @@ exports.register = function (plugin, options, next) {
         const reqHeader = request.headers[versionHeader];
 
         // If there is no request version - just continue as usual..
-        if (!reqHeader) {
+        if (!reqHeader || urlPath.indexOf("credential-management") === -1) {
 
             request.headers.apiVersion = default_version;
             return reply.continue();
@@ -73,5 +73,5 @@ exports.register = function (plugin, options, next) {
 
 exports.register.attributes = {
     name: 'api-versioning',
-    version: '0.0.1'
+    version: '0.0.5'
 };
