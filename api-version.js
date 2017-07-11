@@ -58,7 +58,7 @@ exports.register = function (plugin, options, next) {
             }
             else {
                 // If none matches - then throw not found error error.
-                return reply(Boom.notFound('Missing Implementation'));
+                return reply(Boom.notFound('The requested URL/Method was not found on this server.'));
             }
 
         }
@@ -73,5 +73,5 @@ exports.register = function (plugin, options, next) {
 
 exports.register.attributes = {
     name: 'api-versioning',
-    version: '0.0.5'
+    version: '0.0.6'
 };
