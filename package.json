@@ -6,7 +6,7 @@
     "test": "lab ./test/unit.js --m 10000",
     "lint": "eslint api-version.js"
   },
-  "version": "0.0.6",
+  "version": "0.0.7",
   "dependencies": {
     "boom": "^5.1.0"
   },

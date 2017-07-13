@@ -28,13 +28,18 @@ exports.register = function (plugin, options, next) {
         const reqHeader = request.headers[versionHeader];
 
         // If there is no request version - just continue as usual..
-        if (!reqHeader || urlPath.indexOf("credential-management") === -1) {
+        if (urlPath.indexOf("credential-management") === -1) {
 
             request.headers.apiVersion = default_version;
             return reply.continue();
         }
+        let requestedVersionMatch;
+        if (!reqHeader) {
+            requestedVersionMatch = [null, null, default_version];
+        } else {
+            requestedVersionMatch = reqHeader.match(pattern) || [null, null, default_version];
+        }
 
-        const requestedVersionMatch = reqHeader.match(pattern) || [null,null,default_version];
         if (requestedVersionMatch && !pattern.test(urlPath[0])) {
             const origUrl = '/' + urlPath.join('/');
             const originalConfiguredVersion = route_version_map[origUrl];
@@ -73,5 +78,5 @@ exports.register = function (plugin, options, next) {
 
 exports.register.attributes = {
     name: 'api-versioning',
-    version: '0.0.6'
+    version: '0.0.7'
 };
